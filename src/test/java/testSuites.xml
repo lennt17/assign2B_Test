@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <test name="Test Case" preserve-order="true" verbose="2">
+        <parameter name="browser" value="Chrome" />
+        <classes>
+<!--            <class name="test.DemoTest"></class>-->
+            <class name="test.CreateProject"></class>
+            <class name="test.GetAProject"></class>
+            <class name="test.UpdateProject"></class>
+            <class name="test.GetAllProject"></class>
+        </classes>
+    </test>
+</suite>
