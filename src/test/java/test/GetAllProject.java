@@ -33,7 +33,7 @@ public class GetAllProject {
     }
 
     // Test api create project
-    @Test(description = "Create project")
+    @Test(description = "Get all project")
     public void Test01_getAllProject() {
         accessToken = token.getToken();
         apiProject = new ApiProject();
