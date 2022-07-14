@@ -4,13 +4,21 @@
   <test thread-count="5" name="Test Case(failed)" verbose="0">
     <parameter name="browser" value="Chrome"/>
     <classes>
-      <class name="test.DemoTest">
+      <class name="test.UpdateProject">
         <methods>
-          <include name="Test01_TestAPI"/>
-          <include name="beforeTest"/>
-          <include name="afterTest"/>
+          <include name="Test01_updateProject"/>
         </methods>
-      </class> <!-- test.DemoTest -->
+      </class> <!-- test.UpdateProject -->
+      <class name="test.GetAllProject">
+        <methods>
+          <include name="Test01_getAllProject"/>
+        </methods>
+      </class> <!-- test.GetAllProject -->
+      <class name="test.GetAProject">
+        <methods>
+          <include name="Test01_getAProject"/>
+        </methods>
+      </class> <!-- test.GetAProject -->
     </classes>
   </test> <!-- Test Case(failed) -->
 </suite> <!-- Failed suite [Suite] -->

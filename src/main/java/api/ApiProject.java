@@ -1,48 +1,27 @@
 package api;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import utils.configs.ConfigSettings;
+import io.restassured.response.Response;
 
 import java.util.Map;
-
-import static io.restassured.RestAssured.*;
+import static constant.Constant.*;
 
 public class ApiProject extends APIBase {
-    public ConfigSettings configSettings;
-    public APIBase apiBase;
-    public JsonObject ObjectCreated;
-    public JsonObject ObjectGot;
-    public JsonObject ObjectUpdated;
+    String basePathProject = basePath_project;
 
-    Gson g = new Gson();
-    public ApiProject(){
-        configSettings = new ConfigSettings(System.getProperty("user.dir"));
+    public Response createProject(String accessToken, Map mapPost){
+        return sendPost(accessToken, basePathProject, mapPost);
     }
 
-    public JsonObject create(String accessToken, Map mapPost){
-        apiBase = new APIBase();
-        basePath = configSettings.getBasePathProject();
-        return ObjectCreated = apiBase.getJsonObject(sendPost(accessToken, basePath, mapPost));
+    public Response getAProject(String accessToken, String idProjectGet){
+        return sendGet(accessToken, basePathProject, idProjectGet);
     }
 
-    public JsonObject get(String accessToken, String idProjectGet){
-        basePath = configSettings.getBasePathProject();
-        return ObjectGot = apiBase.getJsonObject(sendGet(accessToken, basePath, idProjectGet));
-    }
-
-    public JsonArray getAll(String accessToken){
-        basePath = configSettings.getBasePathProject();
+    public Response getAllProjects(String accessToken){
         String idProjectGet = "";
-        JsonArray jsonArray;
-        return jsonArray = apiBase.getJsonArray(sendGet(accessToken, basePath, idProjectGet));
+        return sendGet(accessToken, basePathProject, idProjectGet);
     }
 
-    public JsonObject update(String accessToken, String idProject, Map mapUpdate){
-        basePath = configSettings.getBasePathProject() + "/" + idProject;
-        String basePathGet = configSettings.getBasePathProject();
-        sendPost(accessToken, basePath ,mapUpdate);
-        return ObjectUpdated = apiBase.getJsonObject(sendGet(accessToken, basePathGet, idProject));
+    public Response updateProject(String accessToken, String idProject, Map mapUpdate){
+        String basePathUpdate = basePathProject + "/" + idProject;
+        return sendPost(accessToken, basePathUpdate ,mapUpdate);
     }
 }

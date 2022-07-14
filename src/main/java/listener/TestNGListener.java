@@ -15,13 +15,11 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 
 import io.qameta.allure.Attachment;
-import accessToken.Token;
 
 public class TestNGListener implements ITestNGListener {
     protected WebKeywords action;
     private ConfigSettings configSettings;
     private drivers.DriverManager driverManager;
-    public Token token;
 
     public TestNGListener() {
         action = new WebKeywords();

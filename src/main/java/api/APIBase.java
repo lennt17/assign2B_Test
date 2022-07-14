@@ -12,68 +12,70 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.given;
+import static constant.Constant.*;
 
 public class APIBase {
     Gson g = new Gson();
-    private ConfigSettings configSettings;
+    public ConfigSettings configSettings;
     public APIBase(){
         configSettings = new ConfigSettings(System.getProperty("user.dir"));
     }
 
     public Response sendPost(String accessToken, String basePathPT, Map mapPost) {
-        RestAssured.baseURI = configSettings.getBaseURI();
+        RestAssured.baseURI = baseURI;
         basePath = basePathPT;
-        Response re = given()
+        Response res = given()
                 .header("authorization", "Bearer " + accessToken)
                 .header("Content-Type", "application/json")
                 .when()
                 .body(mapPost)
                 .post();
-        re.prettyPrint();
+        res.prettyPrint();
 
-        return re;
+        return res;
     }
 
     public Response sendGet(String accessToken, String basePathPT, String id) {
-        RestAssured.baseURI = configSettings.getBaseURI();
+        RestAssured.baseURI = baseURI;
         basePath = basePathPT;
         final String GET = "/" + id;
-        Response respon = given()
+        Response res = given()
                 .contentType(ContentType.JSON)
                 .headers("authorization", "Bearer " + accessToken)
                 .get(GET);
 
-        respon.prettyPrint();
+        res.prettyPrint();
 
-        return respon;
+        return res;
     }
 
-    public void sendPostReopen(String accessToken, String basePathPT, String str_id) {
-        RestAssured.baseURI = configSettings.getBaseURI();
+    public Response sendPostReopen(String accessToken, String basePathPT, String str_id) {
+        RestAssured.baseURI = baseURI;
         basePath = basePathPT + "/" + str_id;
         final String REOPEN = "/reopen";
-        Response resp = given()
+        Response res = given()
                 .header("authorization", "Bearer " + accessToken)
                 .header("Content-Type", "application/json")
                 .post(REOPEN);
-        resp.prettyPrint();
-    }
+        res.prettyPrint();
 
-    public String getJsonAsString(Response Response){
-        return Response.body().asString();
+        return res;
     }
 
     public JsonObject getJsonObject(Response re){
         Object res = re.as(Object.class);
         String a = g.toJson(res);
-        JsonObject k = g.fromJson(a, JsonObject.class);
-        return k;
+        return g.fromJson(a, JsonObject.class);
     }
 
     public JsonArray getJsonArray(Response re){
         Object res = re.as(Object.class);
         String a = g.toJson(res);
-        JsonArray k = g.fromJson(a, JsonArray.class);
-        return k;
+        return g.fromJson(a, JsonArray.class);
     }
+
+    public int getStatusCode(Response response){
+        return response.getStatusCode();
+    }
+
 }

@@ -1,8 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 56.279 s <<< FAILURE! - in TestSuite
-Test01_TestAPI(test.DemoTest)  Time elapsed: 33.091 s  <<< FAILURE!
-java.lang.AssertionError: expected [true] but found [false]
-	at test.DemoTest.Test01_TestAPI(DemoTest.java:66)
+Tests run: 4, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 11.236 s <<< FAILURE! - in TestSuite
+Test01_getAProject(test.GetAProject)  Time elapsed: 0.389 s  <<< FAILURE!
+java.lang.NullPointerException
+	at test.GetAProject.Test01_getAProject(GetAProject.java:32)
+
+Test01_updateProject(test.UpdateProject)  Time elapsed: 0.354 s  <<< FAILURE!
+java.lang.NullPointerException
+	at test.UpdateProject.Test01_updateProject(UpdateProject.java:38)
+
+Test01_getAllProject(test.GetAllProject)  Time elapsed: 0.338 s  <<< FAILURE!
+java.lang.NullPointerException
+	at test.GetAllProject.Test01_getAllProject(GetAllProject.java:38)
 
