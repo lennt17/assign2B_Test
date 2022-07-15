@@ -3,6 +3,7 @@ import io.restassured.response.Response;
 
 import java.util.Map;
 import static constant.Constant.*;
+import static java.lang.Long.parseLong;
 
 public class ApiProject extends APIBase {
     String basePathProject = basePath_project;
@@ -11,16 +12,15 @@ public class ApiProject extends APIBase {
         return sendPost(accessToken, basePathProject, mapPost);
     }
 
-    public Response getAProject(String accessToken, String idProjectGet){
+    public Response getAProject(String accessToken, long idProjectGet){
         return sendGet(accessToken, basePathProject, idProjectGet);
     }
 
     public Response getAllProjects(String accessToken){
-        String idProjectGet = "";
-        return sendGet(accessToken, basePathProject, idProjectGet);
+        return sendGet(accessToken, basePathProject);
     }
 
-    public Response updateProject(String accessToken, String idProject, Map mapUpdate){
+    public Response updateProject(String accessToken, long idProject, Map mapUpdate){
         String basePathUpdate = basePathProject + "/" + idProject;
         return sendPost(accessToken, basePathUpdate ,mapUpdate);
     }

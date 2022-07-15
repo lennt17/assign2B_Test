@@ -8,31 +8,39 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static constant.Constant.*;
 
 public class TC_GetAllProject {
-    public ApiProject apiProject;
-    public APIBase apiBase;
+    ApiProject apiProject = new ApiProject();
+    APIBase apiBase = new APIBase();
     Token token = new Token();
 
     @Test(description = "Get all project with valid token successfully")
     public void Test01_getAllProject() {
         String accessToken = token.getToken();
-        apiProject = new ApiProject();
-        apiBase = new APIBase();
 
         Response res = apiProject.getAllProjects(accessToken);
         int statusCode = apiBase.getStatusCode(res);
+        System.out.println(statusCode);
         JsonArray arr = apiBase.getJsonArray(res);
         System.out.println(arr);
 
         assertEquals(statusCode, 200);
     }
 
+    @Test(description = "Get all projects when non-existing project in account")
+    public void Test02_getAllProjectWhenNonExistingProject(){
+        String accessToken = token.getToken();
+
+        //precondition: non-existing project in account
+        Response res = apiProject.getAllProjects(accessToken);
+        int statusCode = apiBase.getStatusCode(res);
+        assertEquals(statusCode, 200);
+    }
+
     @Test(description = "Get all project without token")
-    public void Test04_getAllProjectWithoutToken() {
+    public void Test03_getAllProjectWithoutToken() {
         String accessToken = "";
-        apiProject = new ApiProject();
-        apiBase = new APIBase();
 
         Response res = apiProject.getAllProjects(accessToken);
         int statusCode = apiBase.getStatusCode(res);
@@ -40,10 +48,17 @@ public class TC_GetAllProject {
     }
 
     @Test(description = "Get all project with non-existing token")
-    public void Test05_getAllProjectWithNonExistingToken() {
+    public void Test04_getAllProjectWithNonExistingToken() {
         String accessToken = "!@#123";
-        apiProject = new ApiProject();
-        apiBase = new APIBase();
+
+        Response res = apiProject.getAllProjects(accessToken);
+        int statusCode = apiBase.getStatusCode(res);
+        assertEquals(statusCode, 401);
+    }
+
+    @Test(description = "Get all project with expired token")
+    public void Test05_getAllProjectWithExpiredToken(){
+        String accessToken = tokenExpired;
 
         Response res = apiProject.getAllProjects(accessToken);
         int statusCode = apiBase.getStatusCode(res);

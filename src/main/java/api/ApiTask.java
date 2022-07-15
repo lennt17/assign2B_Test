@@ -11,7 +11,7 @@ public class ApiTask extends APIBase {
         return sendPost(accessToken, basePathTask, mapPost);
     }
 
-    public Response reOpenTask(String accessToken, String str_id_task) {
+    public Response reOpenTask(String accessToken, long str_id_task) {
         return sendPostReopen(accessToken,basePathTask, str_id_task);
     }
 }

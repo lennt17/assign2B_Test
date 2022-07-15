@@ -30,12 +30,11 @@ public class APIBase {
                 .when()
                 .body(mapPost)
                 .post();
-        res.prettyPrint();
 
         return res;
     }
 
-    public Response sendGet(String accessToken, String basePathPT, String id) {
+    public Response sendGet(String accessToken, String basePathPT, long id) {
         RestAssured.baseURI = baseURI;
         basePath = basePathPT;
         final String GET = "/" + id;
@@ -44,20 +43,29 @@ public class APIBase {
                 .headers("authorization", "Bearer " + accessToken)
                 .get(GET);
 
-        res.prettyPrint();
+        return res;
+    }
+
+    public Response sendGet(String accessToken, String basePathPT) {
+        RestAssured.baseURI = baseURI;
+        basePath = basePathPT;
+        final String GET = "/";
+        Response res = given()
+                .contentType(ContentType.JSON)
+                .headers("authorization", "Bearer " + accessToken)
+                .get(GET);
 
         return res;
     }
 
-    public Response sendPostReopen(String accessToken, String basePathPT, String str_id) {
+    public Response sendPostReopen(String accessToken, String basePathPT, long id) {
         RestAssured.baseURI = baseURI;
-        basePath = basePathPT + "/" + str_id;
+        basePath = basePathPT + "/" + id;
         final String REOPEN = "/reopen";
         Response res = given()
                 .header("authorization", "Bearer " + accessToken)
                 .header("Content-Type", "application/json")
                 .post(REOPEN);
-        res.prettyPrint();
 
         return res;
     }

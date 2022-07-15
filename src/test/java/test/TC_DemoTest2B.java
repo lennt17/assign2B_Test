@@ -22,16 +22,16 @@ import static constant.Constant.*;
 import static org.testng.Assert.assertTrue;
 
 public class TC_DemoTest2B extends TestNGListener {
-    private String nameProject = "Project 0607";
-    private String nameTask = "Task 0607";
-    private HomePage homePage;
-    private LoginPage loginPage;
-    private TodayPage todayPage;
-    private ProjectPage projectPage;
-    private ConfigSettings configSettings;
-    private APIBase apiBase;
-    public ApiProject apiProject;
-    public ApiTask apiTask;
+    public final String nameProject = "Project 0607";
+    public final String nameTask = "Task 0607";
+    public HomePage homePage;
+    public LoginPage loginPage;
+    public TodayPage todayPage;
+    public ProjectPage projectPage;
+    public ConfigSettings configSettings;
+    APIBase apiBase = new APIBase();
+    ApiProject apiProject = new ApiProject();
+    ApiTask apiTask = new ApiTask();
     Token token = new Token();
 
     public TC_DemoTest2B() {
@@ -40,11 +40,7 @@ public class TC_DemoTest2B extends TestNGListener {
     }
 
     @Test(description = "Create project and task through API and then verify in WebUI")
-    public void Test100_TestAPI(){
-        apiBase = new APIBase();
-        apiProject = new ApiProject();
-        apiTask = new ApiTask();
-        token = new Token();
+    public void Test2B_createProjectAndTaskThenVerifyInUI(){
         String accessToken = token.getToken();
 
         // Create project through API
@@ -66,7 +62,7 @@ public class TC_DemoTest2B extends TestNGListener {
 
         Response response = apiTask.createTask(accessToken, mapPostTask);
         JsonObject objectTaskCreated = apiBase.getJsonObject(response);
-        String idTask = objectTaskCreated.get("id").getAsString();
+        long idTask = objectTaskCreated.get("id").getAsLong();
 
         // Verify value project and task in Web UI
         homePage = new HomePage(action);

@@ -7,42 +7,69 @@ import com.google.gson.JsonObject;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import static constant.Constant.*;
+import static java.lang.Long.parseLong;
 import static org.testng.Assert.assertEquals;
 
 public class TC_GetAProject {
     TC_CreateProject createProject;
-    public ApiProject apiProject;
-    public APIBase apiBase;
+    ApiProject apiProject = new ApiProject();
+    APIBase apiBase = new APIBase();
     Token token = new Token();
 
     @Test(description = "Get a project")
     public void Test01_getAProject() {
         String accessToken = token.getToken();
-        apiProject = new ApiProject();
-        apiBase = new APIBase();
 
-        String idProjectGet = createProject.idProjectCreated;
-        System.out.println("idProjectGet: " + idProjectGet);
+        long idProjectGet = createProject.idProjectCreated;
 
         Response res = apiProject.getAProject(accessToken, idProjectGet);
         JsonObject ObjectProjectGot = apiBase.getJsonObject(res);
-        String idProjectGot = ObjectProjectGot.get("id").getAsString();
+        System.out.println(ObjectProjectGot);
+        long idProjectGot = ObjectProjectGot.get("id").getAsLong();
         int statusCode = apiBase.getStatusCode(res);
 
         assertEquals(idProjectGet, idProjectGot);
         assertEquals(statusCode, 200);
     }
 
-    @Test(description = "Get a project with invalid type of token")
-    public void Test05_GetAProjectWithInvalidTypeOfToken(){
-        apiProject = new ApiProject();
-        apiBase = new APIBase();
-
+    @Test(description = "Get a project without token")
+    public void Test02_getAProjectWithoutToken(){
         String accessToken = "";
-        String idProjectGet = createProject.idProjectCreated;
+        long idProjectGet = createProject.idProjectCreated;
 
         Response res = apiProject.getAProject(accessToken, idProjectGet);
         int statusCode = apiBase.getStatusCode(res);
         assertEquals(statusCode, 403);
+    }
+
+    @Test(description = "Get a project with non-existing token")
+    public void Test03_getAProjectWithNonExistingToken(){
+        String accessToken = "!@#123";
+        long idProjectGet = createProject.idProjectCreated;
+
+        Response res = apiProject.getAProject(accessToken, idProjectGet);
+        int statusCode = apiBase.getStatusCode(res);
+        assertEquals(statusCode, 401);
+    }
+
+    @Test(description = "Get a project with expired token")
+    public void Test04_getAProjectWithExpiredToken(){
+        String accessToken = tokenExpired;
+        long idProjectGet = createProject.idProjectCreated;
+
+        Response res = apiProject.getAProject(accessToken, idProjectGet);
+        int statusCode = apiBase.getStatusCode(res);
+        assertEquals(statusCode, 401);
+    }
+
+    @Test(description = "Get a project with invalid value of id project")
+    public void Test06_getAProjectWithInvalidValueOfIdProject(){
+        String accessToken = token.getToken();
+        long idProjectGet = 1234;
+
+        Response res = apiProject.getAProject(accessToken, idProjectGet);
+        int statusCode = apiBase.getStatusCode(res);
+        assertEquals(statusCode, 404);
     }
 }

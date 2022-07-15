@@ -34,7 +34,6 @@ public class Token extends APIBase {
                 .post()
                 .then()
                 .extract().response();
-        res.prettyPrint();
 
         Object response = res.as(Object.class);
         String a = g.toJson(response);
