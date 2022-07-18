@@ -24,4 +24,9 @@ public class ApiProject extends APIBase {
         String basePathUpdate = basePathProject + "/" + idProject;
         return sendPost(accessToken, basePathUpdate ,mapUpdate);
     }
+
+    public Response deleteProject(String accessToken, long idProject){
+        String basePathDelete = basePathProject + "/" + idProject;
+        return sendDelete(accessToken, basePathDelete);
+    }
 }

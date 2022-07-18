@@ -4,21 +4,29 @@
   <test thread-count="5" name="Test Case(failed)" verbose="0">
     <parameter name="browser" value="Chrome"/>
     <classes>
-      <class name="test.UpdateProject">
+      <class name="test.TC_GetAllProject">
         <methods>
-          <include name="Test01_updateProject"/>
+          <include name="Test03_getAllProjectWithoutToken"/>
         </methods>
-      </class> <!-- test.UpdateProject -->
-      <class name="test.GetAllProject">
+      </class> <!-- test.TC_GetAllProject -->
+      <class name="test.TC_UpdateProject">
         <methods>
-          <include name="Test01_getAllProject"/>
+          <include name="Test06_updateProjectWithInvalidValueOfOptionalField"/>
+          <include name="Test04_updateProjectWithFieldUndefine"/>
+          <include name="Test07_updateProjectWithoutToken"/>
+          <include name="Test05_updateProjectWithInvalidTypeOfOptionField"/>
         </methods>
-      </class> <!-- test.GetAllProject -->
-      <class name="test.GetAProject">
+      </class> <!-- test.TC_UpdateProject -->
+      <class name="test.TC_CreateProject">
         <methods>
-          <include name="Test01_getAProject"/>
+          <include name="Test08_createProjectWithUndefineField"/>
+          <include name="Test10_createProjectWithoutToken"/>
+          <include name="Test06_createProjectWithInvalidValueOfOptionalFields"/>
+          <include name="Test03_createProjectWithSameBodyTwice"/>
+          <include name="Test04_createProjectWithInvalidTypeOfName"/>
+          <include name="Test07_createProjectWithInvalidTypeOfOptionalFields"/>
         </methods>
-      </class> <!-- test.GetAProject -->
+      </class> <!-- test.TC_CreateProject -->
     </classes>
   </test> <!-- Test Case(failed) -->
 </suite> <!-- Failed suite [Suite] -->

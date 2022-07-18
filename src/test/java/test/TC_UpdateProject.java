@@ -20,7 +20,7 @@ public class TC_UpdateProject {
     Token token = new Token();
 
     // Test api update project
-    @Test(description = "Update project successfully with valid token and valid optional field")
+    @Test(description = "API: Update project - successfully with valid token and valid optional field")
     public void Test01_updateProject() {
         String accessToken = token.getToken();
 
@@ -39,7 +39,7 @@ public class TC_UpdateProject {
         assertEquals(nameProjectUpdated, nameProjectUpdate);
     }
 
-    @Test(description = "Update project with field undefine")
+    @Test(description = "API: Update project - with field undefine")
     public void Test04_updateProjectWithFieldUndefine() {
         String accessToken = token.getToken();
 
@@ -55,7 +55,7 @@ public class TC_UpdateProject {
         assertEquals(statusCode, 400);
     }
 
-    @Test(description = "Update project successfully with valid token and invalid type of optional field")
+    @Test(description = "API: Update project - with invalid type of optional field")
     public void Test05_updateProjectWithInvalidTypeOfOptionField() {
         String accessToken = token.getToken();
 
@@ -89,7 +89,7 @@ public class TC_UpdateProject {
         assertEquals(statusCode3, 400);
     }
 
-    @Test(description = "Update project with invalid value of optional field")
+    @Test(description = "API: Update project - with invalid value of optional field")
     public void Test06_updateProjectWithInvalidValueOfOptionalField(){
         String accessToken = token.getToken();
         long idProjectUpdate = createProject.idProjectCreated;
@@ -116,7 +116,7 @@ public class TC_UpdateProject {
         assertEquals(statusCode3, 400);
     }
 
-    @Test(description = "Update project without token")
+    @Test(description = "API: Update project - without token")
     public void Test07_updateProjectWithoutToken(){
         String accessToken = "";
         long idProjectUpdate = createProject.idProjectCreated;
@@ -129,7 +129,7 @@ public class TC_UpdateProject {
         assertEquals(statusCode, 401);
     }
 
-    @Test(description = "Update project with non-existing token")
+    @Test(description = "API: Update project - with non-existing token")
     public void Test08_updateProjectWithNonExistingToken(){
         String accessToken = "!@#123";
         long idProjectUpdate = createProject.idProjectCreated;
@@ -142,7 +142,7 @@ public class TC_UpdateProject {
         assertEquals(statusCode, 401);
     }
 
-    @Test(description = "Update project with expired token")
+    @Test(description = "API: Update project - with expired token")
     public void Test09_updateProjectWithExpiredToken(){
         String accessToken = tokenExpired;
         long idProjectUpdate = createProject.idProjectCreated;
@@ -155,7 +155,7 @@ public class TC_UpdateProject {
         assertEquals(statusCode, 401);
     }
 
-    @Test(description = "Update project with empty body")
+    @Test(description = "API: Update project - with empty body")
     public void Test11_updateProjectWithEmptyBody(){
         String accessToken = token.getToken();
         long idProjectUpdate = createProject.idProjectCreated;

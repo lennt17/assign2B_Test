@@ -39,7 +39,7 @@ public class TC_DemoTest2B extends TestNGListener {
         configSettings = new ConfigSettings(System.getProperty("user.dir"));
     }
 
-    @Test(description = "Create project and task through API and then verify in WebUI")
+    @Test(description = "API & UI: Create project and task through API and then verify in WebUI")
     public void Test2B_createProjectAndTaskThenVerifyInUI(){
         String accessToken = token.getToken();
 

@@ -15,7 +15,7 @@ public class TC_GetAllProject {
     APIBase apiBase = new APIBase();
     Token token = new Token();
 
-    @Test(description = "Get all project with valid token successfully")
+    @Test(description = "API: Get all projects - with valid token successfully")
     public void Test01_getAllProject() {
         String accessToken = token.getToken();
 
@@ -28,7 +28,7 @@ public class TC_GetAllProject {
         assertEquals(statusCode, 200);
     }
 
-    @Test(description = "Get all projects when non-existing project in account")
+    @Test(description = "API: Get all projects - when non-existing project in account")
     public void Test02_getAllProjectWhenNonExistingProject(){
         String accessToken = token.getToken();
 
@@ -38,7 +38,7 @@ public class TC_GetAllProject {
         assertEquals(statusCode, 200);
     }
 
-    @Test(description = "Get all project without token")
+    @Test(description = "API: Get all projects - without token")
     public void Test03_getAllProjectWithoutToken() {
         String accessToken = "";
 
@@ -47,7 +47,7 @@ public class TC_GetAllProject {
         assertEquals(statusCode, 401);
     }
 
-    @Test(description = "Get all project with non-existing token")
+    @Test(description = "API: Get all projects - with non-existing token")
     public void Test04_getAllProjectWithNonExistingToken() {
         String accessToken = "!@#123";
 
@@ -56,7 +56,7 @@ public class TC_GetAllProject {
         assertEquals(statusCode, 401);
     }
 
-    @Test(description = "Get all project with expired token")
+    @Test(description = "API: Get all projects - with expired token")
     public void Test05_getAllProjectWithExpiredToken(){
         String accessToken = tokenExpired;
 

@@ -17,7 +17,7 @@ public class TC_GetAProject {
     APIBase apiBase = new APIBase();
     Token token = new Token();
 
-    @Test(description = "Get a project")
+    @Test(description = "API: Get a project - successfully")
     public void Test01_getAProject() {
         String accessToken = token.getToken();
 
@@ -33,7 +33,7 @@ public class TC_GetAProject {
         assertEquals(statusCode, 200);
     }
 
-    @Test(description = "Get a project without token")
+    @Test(description = "API: Get a project - without token")
     public void Test02_getAProjectWithoutToken(){
         String accessToken = "";
         long idProjectGet = createProject.idProjectCreated;
@@ -43,7 +43,7 @@ public class TC_GetAProject {
         assertEquals(statusCode, 403);
     }
 
-    @Test(description = "Get a project with non-existing token")
+    @Test(description = "API: Get a project - with non-existing token")
     public void Test03_getAProjectWithNonExistingToken(){
         String accessToken = "!@#123";
         long idProjectGet = createProject.idProjectCreated;
@@ -53,7 +53,7 @@ public class TC_GetAProject {
         assertEquals(statusCode, 401);
     }
 
-    @Test(description = "Get a project with expired token")
+    @Test(description = "API: Get a project - with expired token")
     public void Test04_getAProjectWithExpiredToken(){
         String accessToken = tokenExpired;
         long idProjectGet = createProject.idProjectCreated;
@@ -63,7 +63,7 @@ public class TC_GetAProject {
         assertEquals(statusCode, 401);
     }
 
-    @Test(description = "Get a project with invalid value of id project")
+    @Test(description = "API: Get a project - with invalid value of id project")
     public void Test06_getAProjectWithInvalidValueOfIdProject(){
         String accessToken = token.getToken();
         long idProjectGet = 1234;

@@ -70,6 +70,17 @@ public class APIBase {
         return res;
     }
 
+    public Response sendDelete(String accessToken, String basePathPT){
+        RestAssured.baseURI = baseURI;
+        basePath = basePathPT;
+        Response res = given()
+                .contentType(ContentType.JSON)
+                .headers("authorization", "Bearer " + accessToken)
+                .delete();
+
+        return res;
+    }
+
     public JsonObject getJsonObject(Response re){
         Object res = re.as(Object.class);
         String a = g.toJson(res);
